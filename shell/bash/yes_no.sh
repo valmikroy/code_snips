@@ -16,3 +16,10 @@ function yes_no  {
         fi
  
 }
+
+
+yes_no 'do you want to continue ? '
+if [ $? -eq 0 ]
+then
+        exit
+fi
