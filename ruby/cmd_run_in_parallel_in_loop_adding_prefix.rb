@@ -43,7 +43,7 @@ end
 
 
 # Adding start time as unique ID for a run
-ENV['RUN_ID'] = Time.now.strftime("%Y%m%d%H%M%S")
+ENV['RUN_ID'] = Time.now.strftime("%Y%m%d%H%M%S") if ENV['RUN_ID'].nil?
   
 
 
