@@ -7,3 +7,6 @@ Parallel execution of commands and prefix respective outputs ( timestamp and com
 
 #### s3_share_signed_url.rb
 Share S3 private object with signed URL 
+
+#### dir_walk_sha_yaml.rb
+This will walk through PWD recursively to generate SHA of each file and STDOUT in yaml.
