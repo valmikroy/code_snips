@@ -2,4 +2,4 @@
 - `install_bcc_tools.sh` Install BCC tools
 - `install_rvm.sh` Install RVM
 - `genctags.sh` Generate ctags and cscope files
- 
+- `pcie_aer_setup.sh` PCIe AER flag clear 
