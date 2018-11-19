@@ -14,13 +14,21 @@ dpkg-deb -x ./path/to/test.deb ./path/to/destination
  dpkg -f ./path/to/test.deb Version
 ```
 
+-get list of depedencies with version numbers for deb file
+```
+dpkg -I ./path/to/test.deb
+```
+
 
 ### package installation
 - install specifc version of package with apt
 ```
 apt-get install <pkgname>=<pkgversion>
 ```
-- 
+- get list of availble versions of given package in repository 
+```
+apt-cache madison <pkgname>
+```
 
 ### for installed package
 
@@ -37,4 +45,7 @@ dpkg -S <filename>
 ```
 dpkg-query --showformat='${Version}\n' --show <pkg_name>
 ```
-
+- Get depedent package name list
+```
+apt-cache showpkg <package_name>
+```
