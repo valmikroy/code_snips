@@ -1,4 +1,4 @@
-### For .deb
+### for .deb
 
 - get list of files inside .deb
 ```
@@ -7,10 +7,20 @@ dpkg -c <deb file>
 
 
 
+### package installation
+- install specifc version of package with apt
+```
+apt-get install <pkgname>=<pkgversion>
+```
 
-### For installed debian package
+### for installed package
 
 - reinstall debian package 
 ```
-sudo apt-get install --reinstall  <pkg name which is already installed on host>
+apt-get install --reinstall  <pkg name which is already installed on host>
+```
+
+- given file belongs to which installed package
+```
+dpkg -S <filename>
 ```
