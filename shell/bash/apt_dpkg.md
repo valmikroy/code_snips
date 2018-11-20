@@ -14,7 +14,7 @@ dpkg-deb -x ./path/to/test.deb ./path/to/destination
  dpkg -f ./path/to/test.deb Version
 ```
 
--get list of depedencies with version numbers for deb file
+- get list of depedencies with version numbers for deb file
 ```
 dpkg -I ./path/to/test.deb
 ```
