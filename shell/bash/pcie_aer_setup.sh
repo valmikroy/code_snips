@@ -17,6 +17,7 @@ lspci  -vvvv -xxx  -s 03:00.0  | grep -e 'Advanced Error Reporting'
         Capabilities: [fb4 v1] Advanced Error Reporting
 
 # Check the fb4 address that is start address of AER area now add 10 to it which will give you fc4 
-# So command to reset flag would be 
+# So command to reset flag would be following
+# here “.L” means write “LongWord” which is 32-bits (can also do .W/.B which is 16-bits/8-bits).
 
 setpci -s 03:00.0 0xfc4.L=0xffffffff
