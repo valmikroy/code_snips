@@ -1,15 +1,3 @@
-
-
-/*
- take a number , if 1 ignore
- take loop with ever increasing number
- another loop inside which will take series of number less than that given number and divide and see if remainder is zero
- if 2 or divisible by 2 then ignore
- 3 is first prime number
- divisibility test by 2
-*/
-
-
 package main
 import "fmt"
 import "time"
