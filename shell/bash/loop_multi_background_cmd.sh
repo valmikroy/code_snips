@@ -19,6 +19,7 @@ do
                 sleep $(expr $RANDOM % 10) &
         else
                 echo NOT spawning
+                wait
         fi
 done
 
