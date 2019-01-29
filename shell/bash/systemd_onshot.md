@@ -26,3 +26,8 @@ WantedBy=multi-user.target
 - add service to startup sequence `sudo systemctl enable myoneshot`
 
 - run it once `sudo systemctl start myoneshot`
+
+To remove service do following 
+- stop daemon `sudo systemctl stop myoneshot`
+- disable from startup `sudo systemctl disable moneyshot`
+- remove related files `rm -rf /etc/default/myoneshot /etc/systemd/system/myoneshot.service`
