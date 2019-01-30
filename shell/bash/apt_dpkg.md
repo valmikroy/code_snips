@@ -18,6 +18,15 @@ dpkg-deb -x ./path/to/test.deb ./path/to/destination
 ```
 dpkg -I ./path/to/test.deb
 ```
+- remove broken deb package
+```
+dpkg --remove --force-remove-reinstreq package_name 
+```
+- to extract pre/post scripts of debian package
+```
+# this will create DEBIAN folder with all control files
+dpkg -e package.deb
+```
 
 
 ### package installation
