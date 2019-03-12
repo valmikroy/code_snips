@@ -1,4 +1,4 @@
-Quickly create vagrant instance with following 
+Quickly create `Vagrantfile` instance with following 
 
 ```
 Vagrant.configure("2") do |config|
