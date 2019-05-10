@@ -38,6 +38,14 @@ ERB_STR = %{
 }
 
 
+ERB_LOOP = %{
+<% @data.each do |k, v| %>
+  key <%= k %> and value <%= v.chomp %>
+<% end %>
+}
+
+
+
 data = {
   :one => '11111111',
   :two => '22222222',
@@ -45,3 +53,4 @@ data = {
 }
 
 puts render_tmpl(ERB_STR,data)
+puts render_tmpl(ERB_LOOP,data)
