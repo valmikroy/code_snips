@@ -1,2 +1,2 @@
-exec > >(tee -ia foo.log)
-exec 2> >(tee -ia foo.log >&2)
+exec > >(tee -ia ${BASH_SOURCE}.log)
+exec 2> >(tee -ia ${BASH_SOURCE}.log >&2)
