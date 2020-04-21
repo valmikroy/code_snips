@@ -23,3 +23,7 @@ Host github.com-valmikroy
 [remote "origin"]
         url = git@github.com:valmikroy/code_snips.git
 ```
+- How to get signature of the key to idetify which keys are installed in github ?
+```
+ssh-keygen -l -E md5 -f ~/.ssh/id_rsa_github
+```
