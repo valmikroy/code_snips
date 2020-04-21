@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	sshRun("54.193.90.74", "w")
+	sshRun("54.193.90.777", "w")
 }
 
 func sshRun(addr string, cmd string) error {
