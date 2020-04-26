@@ -1,7 +1,19 @@
 #!/bin/bash
 
 
-INSTANCE="i-ID"
+INSTANCE=$1
+
+if [ -z $INSTANCE ]
+then
+	echo
+	echo "Please provide EC2 instance id"
+	exit
+fi
+
+
+
+
+
 
 function yes_no  {
  
@@ -27,6 +39,7 @@ function execute {
     local status=$?
     if [ $status -ne 0 ]; then
         echo "error with $1" >&2
+	exit 1
     fi
     return $status
 }
