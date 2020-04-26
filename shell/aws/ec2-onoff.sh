@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-INSTANCE="i-0fbe0fb17e385cd88"
+INSTANCE="i-ID"
 
 function yes_no  {
  
