@@ -60,7 +60,7 @@ then
 	break
 fi 
 done
-sleep 20
+sleep 30
 echo "sshing into the instance ${INSTANCE}"
 ssh -o StrictHostKeyChecking=no  -t  $IP
 
@@ -68,9 +68,9 @@ ssh -o StrictHostKeyChecking=no  -t  $IP
 yes_no "do you want to shutdown instance  ${INSTANCE}? "
 if [ $? -eq 1 ]
 then
-	echo "Shutting down the instance"
-	aws ec2  stop-instances --instance-id  ${INSTANCE}
+	echo "Hibernating the instance"
+	aws ec2  stop-instances --hibernate   --instance-id  ${INSTANCE}
 else
 	echo "Left instance running - execute following command to stop it"
-	echo "aws ec2  stop-instances --instance-id  ${INSTANCE}"
+	echo "aws ec2  stop-instances --hibernate  --instance-id  ${INSTANCE}"
 fi
