@@ -21,9 +21,10 @@ function yes_no  {
 
 
 function cmd_wait {
-        yes_no 'do you want to continue with the script? '
+        yes_no 'Do you want to continue with the script? '
         if [ $? -eq 0 ]
         then
+                echo 'Abording execution'
                 exit
         fi
 }
