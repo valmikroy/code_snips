@@ -27,7 +27,12 @@ set encoding=utf-8
 set nocompatible
 
 
+syntax on
+
 " Get that filetype stuff happening
 filetype on
 filetype plugin on
 filetype indent on
+
+set pastetoggle=<F2>
+
