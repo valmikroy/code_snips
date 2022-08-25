@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
-require 'pty'
+
+require 'open3'
 
 
 # commands which run in their own loop
@@ -15,24 +16,19 @@ cmds = [
 
 # command which need to be executed on regular interval
 loop_cmds = [
-        ['softnet_stat','rx_packet_optimization/scripts/softnet/softnet-stat']
+        ['softnet_stat','/home/ec2-user/softnet-stat']
 ]
 
 
 
 # This function to consume @cmds
 def shell_execute(caption,cmd)
-  PTY.spawn( cmd ) do |stdout, stdin, pid|
-    begin
-      stdout.each do  |line|
-	# append timestamp for each line
-        ts = Time.now.strftime("%s")
-        print "timestamp=#{ts} id=#{ENV['RUN_ID']}\ttype=#{caption}\t\t#{line}"
-      end
-    rescue Errno::EIO
-        sleep 1
-    end
+
+  Open3.popen2e('sh', '-c', cmd) do |i,oe,t|
+    ts = Time.now.strftime("%s")
+    oe.each { |line| puts  "timestamp=#{ts} id=#{ENV['RUN_ID']}\ttype=#{caption}\t\t#{line}"  }
   end
+
 end
 
 
@@ -44,26 +40,26 @@ end
 
 # Adding start time as unique ID for a run
 ENV['RUN_ID'] = Time.now.strftime("%Y%m%d%H%M%S") if ENV['RUN_ID'].nil?
-  
+
 
 
 # create threads
 begin
-	threads = []
-	cmds.each do |c|
-		threads << Thread.new do
-			shell_execute(c[0],c[1])
-		end
+        threads = []
+        cmds.each do |c|
+                threads << Thread.new do
+                        shell_execute(c[0],c[1])
+                end
 
-	end
+        end
 
-	loop_cmds.each do |c|
-		threads << Thread.new do
-			loop_shell_execute(c[0],c[1])
-		end
-	end
-	threads.each { |thr| thr.join }
+        loop_cmds.each do |c|
+                threads << Thread.new do
+                        loop_shell_execute(c[0],c[1])
+                end
+        end
+        threads.each { |thr| thr.join }
 
-rescue PTY::ChildExited
+rescue SystemExit => e
   puts "The child process exited!"
-end  
+end
