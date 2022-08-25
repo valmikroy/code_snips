@@ -25,8 +25,7 @@ loop_cmds = [
 def shell_execute(caption,cmd)
 
   Open3.popen2e('sh', '-c', cmd) do |i,oe,t|
-    ts = Time.now.strftime("%s")
-    oe.each { |line| puts  "timestamp=#{ts} id=#{ENV['RUN_ID']}\ttype=#{caption}\t\t#{line}"  }
+    oe.each { |line| puts  "timestamp=#{Time.now.strftime("%s")} id=#{ENV['RUN_ID']}\ttype=#{caption}\t\t#{line}"  }
   end
 
 end
