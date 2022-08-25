@@ -11,12 +11,17 @@ cmds = [
         ['sar_etcp', 'sar -n ETCP 1'],
         ['sar_sock', 'sar -n SOCK 1'],
         ['mpstat_irq','mpstat -I SCPU 1'],
-        ['mpstat_cpu','mpstat -P ALL 1']
+        ['mpstat_cpu','mpstat -P ALL 1'],
+        ['sar_mem','sar -r 1'],
+        ['sar_page','sar -B 1'],
+        ['sar_block_1','sar -b 1'],
+        ['sar_block_2','sar -d 1']
 ]
 
 # command which need to be executed on regular interval
 loop_cmds = [
-        ['softnet_stat','/home/ec2-user/softnet-stat']
+        ['softnet_stat','/home/ec2-user/softnet-stat'],
+        ['socket_mem_sum','/home/ec2-user/sum_netsocket_mem.sh']
 ]
 
 
