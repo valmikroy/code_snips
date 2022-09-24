@@ -1,6 +1,6 @@
 
 
-### Git with different users
+### Configure personal user on work laptop
 
 To configure git repository which has different unix username than your git account name like this one as `valmikroy`. You have to tweak following nobs.
 
@@ -31,3 +31,33 @@ Host github.com-valmikroy
 ```
 ssh-keygen -l -E md5 -f ~/.ssh/id_rsa_github
 ```
+
+
+
+### Delete branch local and remote 
+
+```
+# Delete locally
+git branch -d  <local-branch-name>
+
+# Push it remote
+git push origin --delete <local-branch-name>
+```
+
+
+
+
+
+### Merge branch to master
+
+```
+# checkout master
+git checkout master 
+
+# merge local branch changes in master
+git merge <local-branch-name>
+
+# push merged changes to remote 
+git push 
+```
+
