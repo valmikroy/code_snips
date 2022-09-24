@@ -1,3 +1,7 @@
+
+
+### Git with different users
+
 To configure git repository which has different unix username than your git account name like this one as `valmikroy`. You have to tweak following nobs.
 
 - First, you have to configure you ssh config `~/.ssh/config` for username when called for host `github.com` like following 
