@@ -1,15 +1,55 @@
 Ruby snips
 
-- File read - slurp
+
+
+- Array 
   ```ruby
-  File.readlines('resources/nginx_logs').each   do |line|
+  headers = %w{Name Title Email}
   
-      d = line.chomp.split(/\s+/)
   
-  end	
   ```
 
+  
+
+- String 
+  ```ruby
+  # Multiline 
+  
+  multiline_string = <<-EOM
+  This is a very long string
+  that contains interpolation
+  like #{4 + 5} \n\n
+  EOM
+  ```
+
+  
+
+
+
+- File read 
+  ```ruby
+  File.readlines('resources/nginx_logs').each   do |line|
+      d = line.chomp.split(/\s+/)
+  end	
+  
+  
+  b = IO.readlines("testfile", chomp: true)
+  b[0]   #=> "This is line one"
+  
+  
+  
+  # Another way of reading
+  
+  IO.read("testfile")              #=> "This is line one\nThis is line two\nThis is line three\nAnd so on...\n"
+  IO.read("testfile", 20)          #=> "This is line one\nThi"
+  IO.read("testfile", 20, 10)      #=> "ne one\nThis is line "
+  IO.read("binfile", mode: "rb")   #=> "\xF7\x00\x00\x0E\x12"
+  ```
+
+- File write
+
 - Read STDIN line by line 
+
   ```ruby
   ARGF.each do |line|
   	puts line
@@ -139,7 +179,121 @@ Ruby snips
   t.map { |x|  x.join }
   ```
 
-- 
+- [Case statement](https://www.rubyguides.com/2015/10/ruby-case/)
+
+  ```ruby
+  case capacity
+  when 0
+    "You ran out of gas."
+  when 1..20
+    "The tank is almost empty. Quickly, find a gas station!"
+  when 21..70
+    "You should be ok for now."
+  when 71..100
+    "The tank is almost full."
+  else
+    "Error: capacity has an invalid value (#{capacity})"
+  end
+  
+  
+  
+  case serial_code
+  when /\AC/
+    "Low risk"
+  when /\AL/
+    "Medium risk"
+  when /\AX/
+    "High risk"
+  else
+    "Unknown risk"
+  end
+  ```
+
+- is a hash
+  ```ruby
+  @some_var.is_a?(Hash)
+  ```
+
+- Spec jumpstart 
+  ```ruby
+  class Serial
+    attr_accessor  :data
+  
+    def initialize
+  
+      @data = {
+          'l1' => {
+              'l2' => {
+                  'l3' => {
+                      'l4' => 'value'
+                  }
+              }
+          }
+      }
+    end
+  
+    def serialize_hash
+      d = self.data
+    end
+  end
+  
+  describe Serial, ".roll" do
+    it "it returns random total within expected range" do
+      out = Serial.new.serialize_hash
+      expect(out).to eq('')
+    end
+  end
+  
+  ```
+
+- CSV
+  ```ruby
+  # Credit https://devcamp.com/site_blogs/ruby-csv-generator-tutorial
+  require 'csv'
+  
+  
+  class Serial
+    attr_accessor  :data, :header
+  
+    def initialize
+      @header = %w( Name Title Email )
+      @data = [
+        ["Darth Vader", "CEO", "betterthan@theforce.com"],
+        ["Luke Skywalker", "Dev", "daddy@issues.com"],
+        ["Kylo Ren", "COO", "daddy2@issues.com"],
+      ]
+    end
+  
+    def csv_generate
+      string = CSV.generate do |csv|
+        csv << self.header
+        self.data.each do |r|
+          csv << r
+        end  
+      end  
+  
+      IO.write("sample.csv",string)
+      return string
+    end  
+  end
+  
+  describe Serial, ".roll" do
+    it "it returns random total within expected range" do
+      test_output=<<-EOM
+  Name,Title,Email
+  Darth Vader,CEO,bigdaddy@theforce.com
+  Luke Skywalker,Dev,daddy@issues.com
+  Kylo Ren,COO,daddy2@issues.com
+      EOM
+  
+      out = Serial.new.csv_generate
+      expect(out).to eq(test_output)
+    end
+  end
+  
+  ```
+
+  
 
 
 
