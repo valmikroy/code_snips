@@ -6,6 +6,9 @@ Ruby snips
   ```ruby
   headers = %w{Name Title Email}
   
+  # Concat multiple arrays
+  
+  [foo, bar, baz].reduce([], :concat)
   
   ```
 
@@ -47,6 +50,11 @@ Ruby snips
   ```
 
 - File write
+  ```ruby
+  File.write("File.name","{daata: data}")
+  ```
+
+  
 
 - Read STDIN line by line 
 
@@ -249,14 +257,17 @@ Ruby snips
 - CSV
   ```ruby
   # Credit https://devcamp.com/site_blogs/ruby-csv-generator-tutorial
+  # Usage: rspec csv.rb
+  
   require 'csv'
   
   
   class Serial
-    attr_accessor  :data, :header
+    attr_accessor  :data, :header, :row_header
   
     def initialize
       @header = %w( Name Title Email )
+      @row_header = %w( R1 R2 R3 )
       @data = [
         ["Darth Vader", "CEO", "betterthan@theforce.com"],
         ["Luke Skywalker", "Dev", "daddy@issues.com"],
@@ -266,13 +277,15 @@ Ruby snips
   
     def csv_generate
       string = CSV.generate do |csv|
-        csv << self.header
-        self.data.each do |r|
-          csv << r
+        csv <<  [].concat([''], self.header)
+        self.data.each_with_index do |r,i|
+          r_header =  self.row_header[i] || nil
+          csv << [].concat([r_header] , r )
         end  
+  
       end  
   
-      IO.write("sample.csv",string)
+      #IO.write("sample.csv",string)
       return string
     end  
   end
@@ -280,10 +293,10 @@ Ruby snips
   describe Serial, ".roll" do
     it "it returns random total within expected range" do
       test_output=<<-EOM
-  Name,Title,Email
-  Darth Vader,CEO,bigdaddy@theforce.com
-  Luke Skywalker,Dev,daddy@issues.com
-  Kylo Ren,COO,daddy2@issues.com
+  "",Name,Title,Email
+  R1,Darth Vader,CEO,betterthan@theforce.com
+  R2,Luke Skywalker,Dev,daddy@issues.com
+  R3,Kylo Ren,COO,daddy2@issues.com
       EOM
   
       out = Serial.new.csv_generate
@@ -296,4 +309,29 @@ Ruby snips
   
 
 
+
+- Rspec template
+  ```ruby
+  
+  describe '#destroy' do
+  	let(:resource) { FactoryBot.create :device }
+  	let(:type)     { Type.find resource.type_id }
+    
+    context 'when resource is found' do
+      it 'sets the type_id field' do
+        expect(resource.type_id).to eq(type.id)
+      end
+    end  
+    
+    context 'when resource is found' do
+      it 'responds with 200' do
+          expect(response).to respond_with_content_type(:json)
+        	expect(hero.equipment).to include "sword"
+      end  
+    end
+  
+  end
+  ```
+
+  
 
