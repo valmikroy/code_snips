@@ -23,6 +23,10 @@ Ruby snips
   that contains interpolation
   like #{4 + 5} \n\n
   EOM
+  
+  # Replace string 
+  'mislocated cat, vindicating'.gsub('cat', 'dog')
+  
   ```
 
   
@@ -331,6 +335,18 @@ Ruby snips
     end
   
   end
+  
+  
+  # Skip broken tests
+  
+  describe 'Command', pending: "Fix is pending" do
+      context 'when resource is found' do
+      it 'responds with 200' do
+          expect(response).to respond_with_content_type(:json)
+        	expect(hero.equipment).to include "sword"
+      end  
+    end
+  end  
   ```
 
   

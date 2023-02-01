@@ -40,4 +40,12 @@ Bash snips
    openssl version | tr -s ' ' '_'
   ```
 
+- Yum source rpm 
+  ```
+  yum repolist all
+  sudo yum-config-manager --enable <source_repo>
+  
+  yumdownloader --source <download source rpm package>
+  ```
+  
   
