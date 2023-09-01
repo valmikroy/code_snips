@@ -311,6 +311,19 @@ Ruby snips
   ```
 
   
+  
+  Generate ruby csv quickly
+  
+  
+  ```ruby
+  csv_string = CSV.generate do |csv|
+      csv_data.each do |r|
+          csv << r
+      end    
+  end
+  ```
+  
+  
 
 
 
