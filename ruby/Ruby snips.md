@@ -364,3 +364,34 @@ Ruby snips
 
   
 
+- Create callbacks
+  ```ruby
+  def verify1(a)
+  	puts "Verify 1 - #{a}"
+  end
+  
+  
+  def verify2(a)
+  	puts "Verify 2 - #{a}"
+  end
+  
+  
+  
+  
+  ds = [
+  	[ method(:verify1) , %w( a b c d )  ],
+  	[ method(:verify2) , %w( e f g h)  ]
+  ]
+  
+  
+  ds.each do  |v|
+  
+     v_func = v[0]
+     v[1].each do |i|
+  	v_func.call(i)
+     end
+  
+  end
+  ```
+
+  
