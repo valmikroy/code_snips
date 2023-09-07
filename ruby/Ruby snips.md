@@ -394,4 +394,14 @@ Ruby snips
   end
   ```
 
+- Padd array 
+  ```
+  def padleft!(a, n, x)
+    a.insert(0, *Array.new([0, n-a.length].max, x))
+  end
+  def padright!(a, n, x)
+    a.fill(x, a.length...n)
+  end
+  ```
+  
   
