@@ -395,7 +395,7 @@ Ruby snips
   ```
 
 - Padd array 
-  ```
+  ```ruby
   def padleft!(a, n, x)
     a.insert(0, *Array.new([0, n-a.length].max, x))
   end
@@ -404,4 +404,10 @@ Ruby snips
   end
   ```
   
+- Match multiple patterns through the file 
+  ```ruby
+  str = IO.read("erb template")
+  str.scan(/<%=(.+?)%>/).flatten.uniq
+  ```
   
+- 
