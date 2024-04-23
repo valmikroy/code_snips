@@ -53,4 +53,23 @@ Bash snips
   ssh-keygen -f ~/.ssh/id_ecdsa -t ecdsa -b 521 -C "blah"
   ```
   
+- Simple logging function 
+  ```shell
+  exec 3>&1
+  
+  log ()
+  {
+      echo "Log message: $1" 1>&3
+  }
+  
+  get_animals()
+  {
+      log "Fetching animals"
+      echo "cat dog mouse"
+  }
+  
+  animals=`get_animals`
+  echo Animals: $animals
+  ```
+  
   
