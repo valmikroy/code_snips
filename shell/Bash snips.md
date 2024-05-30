@@ -102,5 +102,18 @@ Bash snips
   nc -vzw5 <hostname> <port>  
   ```
   
+- Install python virtualenv
+  ```
+  python3 -m venv .venv
+  source .venv/bin/activate
+  deactivate
+  ```
+  
+- Freeze and Thaw your python environment 
+  ```
+  pip freeze > requirements.txt
+  pip install -r requirements.txt
+  ```
+  
   
 
