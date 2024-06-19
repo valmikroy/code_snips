@@ -10,12 +10,13 @@ package main
 import (
     "context"
     "fmt"
-    "log"
+    
     "os"
     "os/user"
     "path"
     "errors"
 
+    log "github.com/sirupsen/logrus"
     "github.com/oracle/oci-go-sdk/v65/common"
     "github.com/oracle/oci-go-sdk/v65/common/auth"
     "github.com/oracle/oci-go-sdk/v65/example/helpers"
