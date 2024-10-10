@@ -115,5 +115,15 @@ Bash snips
   pip install -r requirements.txt
   ```
   
+- Flatten the yaml file 
+  ```shell
+  yq '.. | select(tag != "!!seq" and tag != "!!map") | {path | join("."): .}' values.yaml
+  ```
+  
+- Nmap quick port scan 
+  ```shell
+  nmap -p0- -v -A -T4 <hostname>
+  ```
+  
   
 
