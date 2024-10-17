@@ -123,9 +123,11 @@ Bash snips
 - Nmap quick port scan 
   ```shell
   nmap -p0- -v -A -T4 <hostname>
+  
+  # scan the local network subnet
+  nmap -sn  10.0.0.0/24
 
-# scan the network subnet 
-nmap -sn  10.0.0.0/24
+
   ```
   
   
