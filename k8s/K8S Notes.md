@@ -17,6 +17,7 @@ Clean up and create minikube cluster with API servers exposed to server IP
 ```
 minikube delete
 minikube start --apiserver-ips="10.0.0.1"
+minikube start --apiserver-ips=`ip -f inet addr show enp2s0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p'`
 ```
 
 Following docker command can confirm that API management port `8443` has been up.
@@ -45,6 +46,11 @@ Transfer certificate files created by minikube on the linux server to your Mac d
 ```
 ~/.minikube/profiles/minikube/client.{key,crt} 
 ~/.minikube/ca.crt 
+
+
+scp <linuxserver>:~/.minikube/profiles/minikube/client.{crt,key} ~/.minikube/
+scp <linuxserver>:~/.minikube/profiles/minikube/ca.crt ~/.minikube/
+
 ```
 
 Run the following `kubectl` commands to setup the configuration environment on Mac dekstop
@@ -78,6 +84,80 @@ kubectl config get-contexts --kubeconfig ~/.minikube/config
 
 
 After this you can read the minikube config in openlens to operate on the minikube cluster
+
+
+
+## Run your own docker registary 
+
+Tired of fetching from docker and depending on pushing experimental containers to push there. Running docker registary 
+
+```
+docker run -d -p 5000:5000 --restart always --name registry registry:2
+```
+
+add the entry for http only access in `/etc/docker/daemon.json`
+
+```
+{ 
+"insecure-registries":[
+		"registry1:80",
+		"registry2:458"
+	] 
+}
+```
+
+
+
+Restart docker
+
+```
+ systemctl restart docker
+```
+
+
+
+You need to turn on Avahi for auto discovery of the hostname, minor uncommenting in the config file `/etc/avahi/avahi-daemon.conf` and restart
+
+```
+ sudo service avahi-daemon restart
+```
+
+
+
+Document referance for docker local registary is [here](https://www.allisonthackston.com/articles/local-docker-registry.html)
+
+
+
+Also to make minikube to use local insecure repositor 
+
+```
+minikube start \
+	--apiserver-ips=`ip -f inet addr show enp2s0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p'`  \
+	--insecure-registry="<linux_server>:5000" \
+	--addons=ingress
+```
+
+
+
+You might want to delete the old minikube cluster to make sure the above insecure registry access works fine. 
+
+
+
+
+
+
+
+### Grafana install 
+
+```
+kubectl get crd
+```
+
+
+
+```
+ kubectl get secret --namespace soat-grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
 
 
 

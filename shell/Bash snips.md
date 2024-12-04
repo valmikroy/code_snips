@@ -126,9 +126,10 @@ Bash snips
   
   # scan the local network subnet
   nmap -sn  10.0.0.0/24
-
-
+  
   ```
-  
-  
+- quick IP address
+```shell
+ip -f inet addr show enp2s0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p'
+```
 
