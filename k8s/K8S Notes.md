@@ -2,6 +2,23 @@
 
 Document to note down minikube setup and related experimentation.
 
+
+
+## Install minikube
+
+```
+sudo apt update
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+minikube version
+```
+
+
+
+
+
+
+
 ## Access local minikube with openlens
 
 To make things simplfy we would like to install docker driver with minikube cluster on the local linux server.  So we can use docker driver and standard docker images without podman.
@@ -60,7 +77,10 @@ Run the following `kubectl` commands to setup the configuration environment on M
 The following should create cluster entry in the config
 
 ```
-kubectl config set-cluster minikube --server https://127.0.0.1:18443 --certificate-authority=/User/<login>/.minikube/ca.crt --kubeconfig ~/.minikube/config  
+kubectl config set-cluster minikube \
+	--server https://127.0.0.1:18443 \
+	--certificate-authority=/Users/<login>/.minikube/ca.crt \
+	--kubeconfig ~/.minikube/config  
 ```
 
 
@@ -68,7 +88,10 @@ kubectl config set-cluster minikube --server https://127.0.0.1:18443 --certifica
 Create credentials
 
 ```
-kubectl config set-credentials minikube --client-certificate=User/<login>/.minikube/client.crt --client-key=~/.minikube/client.key  --kubeconfig ~/.minikube/config  
+kubectl config set-credentials minikube \
+	--client-certificate=/Users/<login>/.minikube/client.crt \
+	--client-key=/Users/<login>/.minikube/client.key  \
+	--kubeconfig ~/.minikube/config  
 ```
 
 
@@ -76,7 +99,11 @@ kubectl config set-credentials minikube --client-certificate=User/<login>/.minik
 Create a context 
 
 ```
-kubectl config set-context minikube --cluster=minikube --namespace=default --user=minikube  --kubeconfig ~/.minikube/config
+kubectl config set-context minikube 
+	--cluster=minikube \
+	--namespace=default \
+	--user=minikube  \
+	--kubeconfig ~/.minikube/config
 
 kubectl config get-contexts --kubeconfig ~/.minikube/config
 ```
