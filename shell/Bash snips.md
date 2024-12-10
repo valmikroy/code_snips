@@ -129,7 +129,18 @@ Bash snips
   
   ```
 - quick IP address
-```shell
-ip -f inet addr show enp2s0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p'
-```
+  ```shell
+  ip -f inet addr show enp2s0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p'
+  ```
 
+- Write a large amount of data in the file - [credits](https://superuser.com/questions/792427/creating-a-large-file-of-random-bytes-quickly)
+  ```shell
+  openssl enc -aes-256-ctr -pass pass:"$(dd if=/dev/urandom bs=128 count=1 2>/dev/null | base64)" -nosalt < /dev/zero > randomfile.bin
+  
+  ```
+- Listen ports with `lsof`
+  ```shell
+  sudo lsof -iTCP -sTCP:LISTEN -P -n
+  ```
+  
+  
