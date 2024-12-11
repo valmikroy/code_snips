@@ -143,4 +143,23 @@ Bash snips
   sudo lsof -iTCP -sTCP:LISTEN -P -n
   ```
   
+- Discard local git branch changes and replace it with the remote branch
+  ``` shell
+  # Get into your branch locally  
+  git checkout your-branch-name
+  
+  # Get name of remote branch, usually origin/ prepended to your branch name. 
+  git branch -a 
+  
+  # hard reset 
+  git reset --hard origin/your-branch-name
+  
+  # clean the branch 
+  git clean -fd
+  
+  # check the status 
+  git status
+  
+  ```
+  
   
