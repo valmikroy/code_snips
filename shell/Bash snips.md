@@ -1,5 +1,17 @@
 Bash snips
 
+- Multiple lines stored in bash variables
+  ```shell
+  USAGE=$(cat <<-END
+      This is line one.
+      This is line two.
+      This is line three.
+  END
+  )
+  ```
+
+  
+
 
 
 - Run command is parallel
@@ -128,6 +140,7 @@ Bash snips
   nmap -sn  10.0.0.0/24
   
   ```
+  
 - quick IP address
   ```shell
   ip -f inet addr show enp2s0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p'
@@ -138,6 +151,7 @@ Bash snips
   openssl enc -aes-256-ctr -pass pass:"$(dd if=/dev/urandom bs=128 count=1 2>/dev/null | base64)" -nosalt < /dev/zero > randomfile.bin
   
   ```
+  
 - Listen ports with `lsof`
   ```shell
   sudo lsof -iTCP -sTCP:LISTEN -P -n
@@ -161,5 +175,38 @@ Bash snips
   git status
   
   ```
+  
+- Set up cloud instance quickly 
+  ```shell
+  U="valmikroy"
+  export $U
+  sudo adduser $U
+  sudo passwd $U
+  sudo usermod -aG wheel $U  or sudo usermod -aG sudo $U
+  sudo sh -c "echo '$U ALL=(ALL) NOPASSWD:ALL'  > /etc/sudoers.d/99-sudo-user"
+  
+  ```
+  
+  ```shell
+  sudo su -l $U
+  mkdir ~/.ssh
+  chmod 700 ~/.ssh
+  touch ~/.ssh/authorized_keys
+  chmod 600 ~/.ssh/authorized_keys
+  cat >> ~/.ssh/authorized_keys
+  ```
+  
+  
+  
+  ```shell
+  # spit out public key for give key 
+   ssh-keygen -y -f id_rsa_${U} > id_rsa_${U}.pub
+  ```
+  
+  
+  
+  
+  
+  
   
   
