@@ -205,8 +205,20 @@ Bash snips
   
   
   
+- Go setup quick 
+```shell
+# download go - https://go.dev/doc/install
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.23.4.linux-amd64.tar.gz
+
+mkdir -p $HOME/goworkspace
+
+# Add the following in bashrc
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/goworkspace
+
+```
+
   
-  
-  
-  
+
   
