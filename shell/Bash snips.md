@@ -218,6 +218,11 @@ export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/goworkspace
 
 ```
+- Docker user permission on Ubuntu
+```
+ sudo usermod -aG docker valmikroy
+```
+
 
   
 
