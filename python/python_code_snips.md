@@ -2,7 +2,7 @@
 
 
 
-#### Query 
+#### HTTP Request
 
 ```python
 import requests
@@ -16,7 +16,7 @@ print(json.dumps(r.json(), indent=4))
 
 
 
-#### Json
+#### JSON
 
 ```python
 import json
@@ -37,6 +37,9 @@ f.close()
 #### Time difference 
 
 ```python
+from dateutil.parser import parse
+import datetime
+
 def get_timediff(ts):
     start_time = parse(ts,fuzzy=True)
     now = datetime.datetime.now(datetime.timezone.utc)
@@ -76,4 +79,61 @@ if m:
 
 found
 ```
+
+
+
+
+
+## K8S
+
+#### Fetch container  logs
+```python
+import kubernetes
+
+w = kubernetes.watch.Watch()
+
+line_cnt = 10
+for l in w.stream( v1.read_namespaced_pod_log,
+        name="my-pod-9qzsf",
+        container="my-container",
+        namespace="my-relay",
+        since_seconds=300,
+        _preload_content=False
+        
+):
+        line_cnt -= 1      
+        if not line_cnt:
+            w.stop()    
+        print(json.loads(l)['ts'])
+
+print("INFO:: Logs reading thread has finished")
+```
+
+
+
+
+
+
+
+####  kubelet API query 
+
+``` python
+import kubernetes
+
+api_client=kubernetes.client.ApiClient()
+
+ret_metrics = api_client.call_api('/api/v1/nodes/10.0.29.209/proxy/metrics/cadvisor', 
+                                  'GET', 
+                                  auth_settings = ['BearerToken'], 
+                                  response_type='json', 
+                                  _preload_content=False) 
+response = ret_metrics[0].data.decode('utf-8')
+
+pprint(response)
+
+# kubectl get --raw /api/v1/nodes/<node-name>/proxy/containerLogs/{podNamespace}/{podID}/{containerName}
+# available APIs https://github.com/kubernetes/kubernetes/blob/14344b57e56258e87cbe80c8cd80399855eca424/pkg/kubelet/server/auth_test.go#L110-L143
+```
+
+
 

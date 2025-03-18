@@ -223,6 +223,15 @@ export GOPATH=$HOME/goworkspace
  sudo usermod -aG docker valmikroy
 ```
 
+- Create a go cli with cobra 
+```shell
+ cd blah
+ go mod init  github.com/valmikroy/blah
+ cobra-cli init
+ cobra-cli add blah-cmd
+ go run main.go blah-cmd
+```
+
 
 
 
