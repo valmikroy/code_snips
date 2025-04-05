@@ -232,6 +232,11 @@ export GOPATH=$HOME/goworkspace
  go run main.go blah-cmd
 ```
 
+- python trace 
+```
+python -m trace -t  <script>
+```
+
 
 
 
